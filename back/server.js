@@ -23,7 +23,8 @@ console.log("AQUI SERVER:",path.join(__dirname,`server`));
 
 //sequelize.sync()
 //.then(() => {
-  server.listen(server.get('port'),()=> {
+  server.listen(server.get('port'))
+//,()=> {
   //debug(`Express listening on port ${server.get('port')}`);
   
  // });
