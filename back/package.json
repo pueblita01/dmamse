@@ -7,13 +7,15 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "local:migrate": "node_modules/.bin/sequelize db:migrate",
     "local:migrate:undo": "node_modules/sequelize-cli/lib/sequelize db:migrate:undo",
-    "local:seeds": "node_modules/.bin/sequelize db:seed:all"
+    "local:seeds": "node_modules/.bin/sequelize db:seed:all",
+    "start": "nodemon morgan server.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mysql2": "^3.10.0",
     "sequelize": "^6.37.3"
