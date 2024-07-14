@@ -7,6 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "local:migrate": "node_modules/.bin/sequelize db:migrate",
     "local:migrate:undo": "node_modules/sequelize-cli/lib/sequelize db:migrate:undo",
+    "local:migrate:undo:all": "node_modules/sequelize-cli/lib/sequelize db:migrate:undo:all",
+    "local:migrate:status": "node_modules/.bin/sequelize db:migrate:status",
     "local:seeds": "node_modules/.bin/sequelize db:seed:all",
     "start": "nodemon morgan server.js"
   },

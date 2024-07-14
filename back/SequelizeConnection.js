@@ -3,13 +3,7 @@ require("dotenv").config();
 const timezone = 'America/Argentina/Buenos_Aires';
 require('moment').tz.setDefault(timezone)
 
-
-
 const Sequelize = require("sequelize");
-// const PedidoModel = require("./HomePedidosCliente/Pedido");
-
-
-
 
 const sequelize = process.env.DB_URL
   ? new Sequelize(process.env.DB_URL)
@@ -35,28 +29,6 @@ const sequelize = process.env.DB_URL
 const models = {};
 models.Sequelize = Sequelize;
 models.sequelize = sequelize;
-
-
-// models.Pedido = PedidoModel(sequelize, Sequelize);
-
-
-// models.Pedido.hasMany(models.ItemsPedido, {
-//   as: "ItemsPedido",
-//   foreignKey: "pedidoId",
-//   sourceKey: "id",
-//   constraints: false,
-//   onDelete: "CASCADE",
-//   onUpdate: "CASCADE"
-
-// });
-// models.ItemsPedido.belongsTo(models.Pedido, {
-//   as: "Pedidos",
-//   foreignKey: "pedidoId",
-//   targetKey: "id",
-//   constraints: false,
-//   onDelete: "SET NULL",
-//   onUpdate: "SET NULL"
-// })
 
 sequelize
   .authenticate()
