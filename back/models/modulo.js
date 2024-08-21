@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   Modulo.init({
     nombre:{
       allowNull:true,
-      types:DataTypes.CHAR,
+      type:DataTypes.CHAR,
     } 
   }, {
     sequelize,

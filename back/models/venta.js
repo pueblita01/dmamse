@@ -57,15 +57,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     fechaVta: {
       allowNull: true,
-      types: DataTypes.DATE
+      type: DataTypes.DATE
     },
     utilidad: {
       allowNull: true,
-      types: DataTypes.STRING
+      type: DataTypes.STRING
     },
     totalVta: {
       allowNull: true,
-      types: DataTypes.DECIMAL(10, 2)
+      type: DataTypes.DECIMAL(10, 2)
     },
   }, {
     sequelize,

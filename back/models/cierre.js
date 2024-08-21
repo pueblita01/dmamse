@@ -23,15 +23,15 @@ module.exports = (sequelize, DataTypes) => {
     },
     fechaCierre: {
       allowNull: true,
-      types: DataTypes.DATE,
+      type: DataTypes.DATE,
     },
     tipoCierre: {
       allowNull: true,
-      types: DataTypes.STRING(50),
+      type: DataTypes.STRING(50),
     },
     descripcion: {
       allowNull: true,
-      types: DataTypes.STRING,
+      type: DataTypes.STRING,
     },
   }, {
     sequelize,

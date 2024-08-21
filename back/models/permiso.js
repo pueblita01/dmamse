@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   Permiso.init({
     permisoOperacion: {
       allowNull: true,
-      types: DataTypes.CHAR
+      type: DataTypes.CHAR
     }
   }, {
     sequelize,

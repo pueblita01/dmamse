@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     nivelAcceso: {
       allowNull: true,
-      types: DataTypes.CHAR
+      type: DataTypes.CHAR
     },
     nombreEmpresa: {
       type: DataTypes.STRING,

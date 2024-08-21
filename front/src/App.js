@@ -1,20 +1,32 @@
 import React from 'react';
-import NavbarComponent from './componentesPrincipales/NavbarComponent';
-import SidebarComponent from './componentesPrincipales/SidebarComponent';
-import LoginComponent from './componentesPrincipales/LoginComponent';
-import './App.css'; 
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NavbarComponent from './componentesGenerales/NavbarComponent';
+import SidebarComponent from './componentesGenerales/SidebarComponent';
+import ListaClientes from './componentesPersonas/ListaClientes';
+import ListaProveedores from './componentesPersonas/ListaProveedores';
+import Home from './componentesGenerales/Home';
+import LoginComponent from './componentesGenerales/Login';
+import './App.css';
 
 const App = () => {
   return (
-    <div className="d-flex">
-      <SidebarComponent />
-      <div className="flex-grow-1">
-        <NavbarComponent />
-        <div className="container mt-4">
-          <LoginComponent />
+    <Router>
+      <div className="contenedor">
+        <div className="d-flex">
+          <SidebarComponent />
+          <div className="flex-grow-1">
+            <NavbarComponent />
+            <Routes>
+              <Route path="/login" element={<LoginComponent />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/listaClientes" element={<ListaClientes />} />
+              <Route path="/listaProveedores" element={<ListaProveedores />} />
+              <Route path="*" element={<div>404 NOT FOUND</div>} />
+            </Routes>
+          </div>
         </div>
       </div>
-    </div>
+    </Router>
   );
 };
 

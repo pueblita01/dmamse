@@ -32,19 +32,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     cantidad: {
       allowNull: true,
-      types: DataTypes.INTEGER
+      type: DataTypes.INTEGER
     },
     precioUnitario: {
       allowNull: true,
-      types: DataTypes.DECIMAL(10, 2)
+      type: DataTypes.DECIMAL(10, 2)
     },
     descuentoVta: {
       allowNull: true,
-      types: DataTypes.DECIMAL(10, 2)
+      type: DataTypes.DECIMAL(10, 2)
     },
     precioTotalDetalleVta: {
       allowNull: true,
-      types: DataTypes.DECIMAL(10, 2)
+      type: DataTypes.DECIMAL(10, 2)
     },
 
   }, {

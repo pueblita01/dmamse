@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   Rol.init({
     tipoRol: {
       allowNull: true,
-      types: DataTypes.STRING
+      type: DataTypes.STRING
     },
   }, {
     sequelize,

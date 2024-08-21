@@ -1,41 +1,39 @@
 'use strict';
-import { Proveedor } from './proveedor'
-import { Producto } from './producto'
+const { Model, DataTypes } = require('sequelize');
+const Proveedor = require('./proveedor');
+const Producto = require('./producto');
 
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize) => {
   class Producto_Proveedor extends Model {
     static associate(models) {
-      Proveedor.belongsToMany(models.Producto, {
-        through: Producto_Proveedor
-      })
-      Producto.belongsToMany(models.Proveedor, {
-        through: Producto_Proveedor
-      })
+      models.Proveedor.belongsToMany(models.Producto, {
+        through: models.Producto_Proveedor
+      });
+      models.Producto.belongsToMany(models.Proveedor, {
+        through: models.Producto_Proveedor
+      });
     }
   }
+
   Producto_Proveedor.init({
     productoProvId: {
       allowNull: true,
-      foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "Productos", key: "id", constraints: false, },
+      references: { model: "Productos", key: "id", constraints: false },
     },
     proveedorProdId: {
       allowNull: true,
-      foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "Proveedores", key: "id", constraints: false, },
+      references: { model: "Proveedores", key: "id", constraints: false },
     },
   }, {
     sequelize,
     modelName: 'Producto_Proveedor',
-    tableName: "Producto_Proveedor",
+    tableName: 'Producto_Proveedor',
     timestamps: false,
     createdAt: false,
     updatedAt: false,
   });
+
   return Producto_Proveedor;
 };

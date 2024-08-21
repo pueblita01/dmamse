@@ -45,7 +45,7 @@ module.exports = {
       },
       cuilcuitC: {
         allowNull: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER.UNSIGNED
       },
       email: {
         type: Sequelize.STRING,

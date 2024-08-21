@@ -40,27 +40,28 @@ module.exports = (sequelize, DataTypes) => {
     },
     numeroCheque: {
       allowNull: true,
-      types: DataTypes.INTEGER,
+      type: DataTypes.INTEGER,
     },
     banco: {
       allowNull: true,
-      types: DataTypes.STRING,
+      type: DataTypes.STRING,
     },
     fechaEmision: {
       allowNull: true,
-      types: DataTypes.DATE,
+      type: DataTypes.DATE,
     },
     fechaCobro: {
       allowNull: true,
-      types: DataTypes.DATE,
+      type: DataTypes.DATE,
     },
     montoCheque: {
       allowNull: true,
-      types: DataTypes.DECIMAL(10, 2),
+      type: DataTypes.DECIMAL(10, 2),
     },
   }, {
     sequelize,
     modelName: 'Cheque',
+    tableName: 'Cheques'
   });
   return Cheque;
 };
