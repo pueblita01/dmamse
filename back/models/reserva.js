@@ -32,23 +32,23 @@ module.exports = (sequelize, DataTypes) => {
     },
     fechaResvInicio: {
       allowNull: true,
-      types: DataTypes.DATE
+      type: DataTypes.DATE
     },
     fechaReservaFin: {
       allowNull: true,
-      types: DataTypes.DATE
+      type: DataTypes.DATE
     },
     descripcionReserv: {
       allowNull: true,
-      types: DataTypes.STRING
+      type: DataTypes.STRING
     },
     estado: {
       allowNull: true,
-      types: DataTypes.BOOLEAN
+      type: DataTypes.BOOLEAN
     },
     modo: {
       allowNull: true,
-      types: DataTypes.CHAR
+      type: DataTypes.CHAR
     },
   }, {
     sequelize,

@@ -1,6 +1,7 @@
 'use strict';
-import { Rol } from "./rol"
-import { Permiso } from "./permiso"
+
+const Permiso = require('./permiso'); // Cambiado a require
+const Rol = require('./rol'); // Cambiado a require
 const {
   Model
 } = require('sequelize');

@@ -22,11 +22,11 @@ module.exports = (sequelize, DataTypes) => {
   TipoDni.init({
     tipoDNI: {
       allowNull: true,
-      types: DataTypes.CHAR
+      type: DataTypes.CHAR
     },
     nroDNI: {
       allowNull: true,
-      types: DataTypes.INTEGER
+      type: DataTypes.INTEGER
     }
   }, {
     sequelize,

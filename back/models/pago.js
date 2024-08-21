@@ -54,19 +54,19 @@ module.exports = (sequelize, DataTypes) => {
     },
     montoPago: {
       allowNull: true,
-      types: DataTypes.DECIMAL(10, 2)
+      type: DataTypes.DECIMAL(10, 2)
     },
     cuotasCant: {
       allowNull: true,
-      types: DataTypes.INTEGER
+      type: DataTypes.INTEGER
     },
     fechaPago: {
       allowNull: true,
-      types: DataTypes.DATE
+      type: DataTypes.DATE
     },
     descripcion: {
       allowNull: true,
-      types: DataTypes.STRING
+      type: DataTypes.STRING
     },
   }, {
     sequelize,

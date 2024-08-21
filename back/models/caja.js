@@ -34,23 +34,23 @@ module.exports = (sequelize, DataTypes) => {
   Caja.init({
     fechaCaja: {
       allowNull: true,
-      types: DataTypes.DATE
+      type: DataTypes.DATE
     },
     montoinicial: {
       allowNull: true,
-      types: DataTypes.DECIMAL(10, 2)
+      type: DataTypes.DECIMAL(10, 2)
     },
     montoFinal: {
       allowNull: true,
-      types: DataTypes.DECIMAL(10, 2)
+      type: DataTypes.DECIMAL(10, 2)
     },
     tipoCaja: {
       allowNull: true,
-      types: DataTypes.CHAR
+      type: DataTypes.CHAR
     },
     descripcion: {
       allowNull: true,
-      types: DataTypes.STRING
+      type: DataTypes.STRING
     },
   }, {
     sequelize,

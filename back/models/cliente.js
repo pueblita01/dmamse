@@ -106,7 +106,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     cuilcuitC: {
       allowNull: true,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER.UNSIGNED
     },
     email: {
       type: DataTypes.STRING,
