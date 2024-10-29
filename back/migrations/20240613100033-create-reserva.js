@@ -1,25 +1,33 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Reservas', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       clienteReservaId: {
         allowNull: true,
-        foreignKey: true,
         type: Sequelize.INTEGER,
-        references: { model: "Clientes", key: "id", constraints: false, },
+        references: {
+          model: 'Clientes',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       },
       proveedorReservaId: {
         allowNull: true,
-        foreignKey: true,
         type: Sequelize.INTEGER,
-        references: { model: "Proveedores", key: "id", constraints: false, },
+        references: {
+          model: 'Proveedores',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       },
       fechaResvInicio: {
         allowNull: true,
@@ -41,17 +49,10 @@ module.exports = {
         allowNull: true,
         type: Sequelize.CHAR
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
-      }
     });
   },
-  async down(queryInterface, Sequelize) {
+
+  down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Reservas');
   }
 };

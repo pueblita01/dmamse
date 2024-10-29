@@ -1,59 +1,68 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Venta extends Model {
     static associate(models) {
       Venta.belongsTo(models.Cliente, {
+        as: "ClienteVta",
         foreignKey: "clienteVtaId",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
+      Venta.belongsTo(models.Empleado, {
+        as: 'EmpleadoVenta',
+        foreignKey: 'empleadoVtaId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      });
       Venta.hasMany(models.DetallesVenta, {
         as: "DetallesVentas",
-        foreignKey: "detalleVtaId",
+        foreignKey: "ventaId",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
       Venta.belongsTo(models.Caja, {
-        as: 'Cajas',
-        foreignKey: "ventaCajaId",
+        as: 'VentaCaja',
+        foreignKey: "cajaVtaId",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
       Venta.belongsTo(models.Factura, {
-        as: 'Facturas',
+        as: 'FacturasVta',
         foreignKey: "facturaVtaId",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
       Venta.hasMany(models.Pago, {
         as: "Pagos",
-        foreignKey: "pagoVtaId",
+        foreignKey: "ventaId",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
     }
   }
+
   Venta.init({
     clienteVtaId: {
       allowNull: true,
-      foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "Clientes", key: "id", constraints: false, },
+      references: { model: "Clientes", key: "id" },
     },
     cajaVtaId: {
       allowNull: true,
-      foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "Ventas", key: "id", constraints: false, },
+      references: { model: "Cajas", key: "id" },
     },
     facturaVtaId: {
       allowNull: true,
-      foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "Facturas", key: "id", constraints: false, },
+      references: { model: "Facturas", key: "id" },
+    },
+    empleadoVtaId: {
+      allowNull: true,
+      type: DataTypes.INTEGER,
+      references: { model: "Empleados", key: "id" },
     },
     fechaVta: {
       allowNull: true,
@@ -71,9 +80,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Venta',
     tableName: "Ventas",
-    timestamps: false,
-    createdAt: true,
-    updatedAt: false,
+    timestamps: true,
   });
+
   return Venta;
 };

@@ -6,8 +6,8 @@ module.exports = (sequelize, DataTypes) => {
   class Caja extends Model {
     static associate(models) {
       Caja.hasMany(models.Venta, {
-        as: "Ventas",
-        foreignKey: "ventaCajaId",
+        as: "VentasCaja", // Este alias debe ser único
+        foreignKey: "cajaVtaId",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });

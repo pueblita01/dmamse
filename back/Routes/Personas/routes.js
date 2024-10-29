@@ -3,23 +3,41 @@ const router = new express.Router();
 const controllerCliente = require("../../controller/Personas/clientes");
 const controllerProveedor = require("../../controller/Personas/proveedores");
 const controllerRazonSocial = require("../../controller/Personas/razonSocial");
+const controllerDireccion= require("../../controller/Personas/direcciones");
+const controllerTelefono= require("../../controller/Personas/telefonos");
 
-// Rutas para el CRUD de clientes
-router.post("/cliente/nuevo/:razonSocial", controllerCliente.create);
-router.get("/clientes", controllerCliente.getAll);
-router.get("/cliente/existente/:id_cliente", controllerCliente.getById);
-router.put("/cliente/:id_cliente", controllerCliente.update);
-router.delete("/cliente/:id_cliente", controllerCliente.delete);
+// CLIENTE 
+// usados
+router.post("/nuevocliente", controllerCliente.createCliente);
+router.delete('/cliente/:id', controllerCliente.eliminarCliente);
+router.put('/cliente/:id/', controllerCliente.updateCliente);
+router.get('/buscar',controllerCliente.buscarClientePorNombre);
+router.get('/clientes', controllerCliente.getAll);
 
-// Rutas para el CRUD de proveedores
+// sin usar
+router.post("/cliente/nuevo/:razonSocial/:tipoDNI/:nroDNI", controllerCliente.create);
+router.post('/cliente/:clienteId/direcciones', controllerCliente.addDirecciones);
+router.post('/cliente/:clienteId/telefonos', controllerCliente.addTelefonos);
+router.get('/cliente/:id', controllerCliente.getById);
+router.get('/cliente/direcciones/:id_cliente', controllerCliente.obtenerDireccionesDeCliente);
+
+
+// PROVEEDOR
 router.post("/proveedor/nuevo", controllerProveedor.create);
+router.delete("/proveedor/:id_proveedor", controllerProveedor.delete);
+
 router.get("/proveedores", controllerProveedor.getAll);
 router.get("/proveedor/existente/:id_proveedor", controllerProveedor.getById);
 router.put("/proveedor/:id_proveedor", controllerProveedor.update);
-router.delete("/proveedor/:id_proveedor", controllerProveedor.delete);
 
+// DIRECCION
+router.get('/direcciones', controllerDireccion.getAll);
+// router.get('/direccion/:cliente', controllerCliente.obtenerDireccionesDeCliente);
 
-// Rutas para el CRUD de razones sociales
+// TELEFONO
+router.get('/telefonos', controllerTelefono.getAll);
+
+// RAZON SOCIAL
 router.post("/razonSocial/nueva", controllerRazonSocial.create);
 router.get("/razonesSociales", controllerRazonSocial.getAll);
 router.get("/razonSocial/existente/:id_razon_social", controllerRazonSocial.getById);

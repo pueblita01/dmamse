@@ -1,7 +1,6 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Subfamilias', {
       id: {
         allowNull: false,
@@ -10,13 +9,32 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       nombreSubfamilia: {
+        type: Sequelize.STRING,
         allowNull: true,
-        type: Sequelize.CHAR,
       },
-
+      familiaId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'Familias',
+          key: 'id',
+        },
+        onDelete: 'SET NULL',
+        onUpdate: 'SET NULL',
+      },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+      }
     });
   },
-  async down(queryInterface, Sequelize) {
+  down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Subfamilias');
   }
 };

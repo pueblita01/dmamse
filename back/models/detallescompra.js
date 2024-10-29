@@ -1,58 +1,67 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class DetallesCompra extends Model {
     static associate(models) {
       DetallesCompra.belongsTo(models.Compra, {
-        foreignKey: "detalleCprId",
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
+        as: 'CompraDetalle',
+        foreignKey: 'detalleCprId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       });
       DetallesCompra.belongsTo(models.Producto, {
-        foreignKey: "productoCprId",
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
+        as: 'ProductoDetalle',
+        foreignKey: 'productoCprId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       });
     }
   }
+
   DetallesCompra.init({
     detalleCprId: {
-      allowNull: true,
-      foreignKey: true,
+      allowNull: false, // Cambiado a false porque debe ser requerido
       type: DataTypes.INTEGER,
-      references: { model: "Compras", key: "id", constraints: false, },
+      references: {
+        model: 'Compras',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
     },
     productoCprId: {
-      allowNull: true,
-      foreignKey: true,
+      allowNull: false, // Cambiado a false porque debe ser requerido
       type: DataTypes.INTEGER,
-      references: { model: "Productos", key: "id", constraints: false, },
+      references: {
+        model: 'Productos',
+        key: 'id',
+      },
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
     },
     cantidadCpr: {
       allowNull: true,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     precioUnitario: {
       allowNull: true,
-      type: DataTypes.DECIMAL(10, 2)
+      type: DataTypes.DECIMAL(10, 2),
     },
     descuentoCpr: {
       allowNull: true,
-      type: DataTypes.DECIMAL(10, 2)
+      type: DataTypes.DECIMAL(10, 2),
     },
     precioTotalDetalle: {
       allowNull: true,
-      type: DataTypes.DECIMAL(10, 2)
+      type: DataTypes.DECIMAL(10, 2),
     },
   }, {
     sequelize,
     modelName: 'DetallesCompra',
     tableName: 'DetallesCompras',
     timestamps: false,
-    createdAt: false,
-    updatedAt: false,
   });
+
   return DetallesCompra;
 };

@@ -1,22 +1,22 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('RazonesSociales', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       razonSocial: {
+        type: Sequelize.STRING(255), // Tipo de datos ajustado para cadenas de texto
         allowNull: true,
-        type: Sequelize.CHAR
       },
-
     });
   },
-  async down(queryInterface, Sequelize) {
+
+  down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('RazonesSociales');
   }
 };

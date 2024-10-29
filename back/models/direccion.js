@@ -1,69 +1,96 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Direccion extends Model {
-
     static associate(models) {
-      Direccion.belongTo(models.Cliente, {
-        as: "Clientes",
-        foreignKey: "direccionCId",
+      Direccion.belongsTo(models.Cliente, {
+        foreignKey: 'clienteDirId',
+        as: 'ClienteC',
         constraints: false,
-        onDelete: "SET NULL",
-        onUpdate: "SET NULL"
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       });
-      Direccion.belongTo(models.Proveedor, {
-        as: "Proveedores",
-        foreignKey: "direccionPId",
+
+      Direccion.belongsTo(models.Proveedor, {
+        foreignKey: 'proveedorDirId',
+        as: 'ProveedorP',
         constraints: false,
-        onDelete: "SET NULL",
-        onUpdate: "SET NULL"
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      });
+
+      Direccion.belongsTo(models.Empleado, {
+        foreignKey: 'empleadoDirId',
+        as: 'EmpleadoD',
+        constraints: false,
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       });
     }
   }
+
   Direccion.init({
-    calle: {
-      type: DataTypes.CHAR,
+    clienteDirId: {
       allowNull: true,
-    },
-    altura: {
+      foreignKey: true,
       type: DataTypes.INTEGER,
-      allowNull: false,
+      references: { model: "Clientes", key: "id" },
     },
-    codigoPostal: {
-      type: DataTypes.CHAR,
-      allowNull: false,
+    proveedorDirId: {
+      allowNull: true,
+      foreignKey: true,
+      type: DataTypes.INTEGER,
+      references: { model: "Proveedores", key: "id" },
+    },
+    empleadoDirId: {
+      allowNull: true,
+      foreignKey: true,
+      type: DataTypes.INTEGER,
+      references: { model: "Empleados", key: "id" },
+    },
+    calle: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    numero: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     manzana: {
-      type: DataTypes.CHAR,
-      allowNull: true,
+      type: DataTypes.STRING,
+      allowNull: true
     },
     departamento: {
-      type: DataTypes.CHAR,
-      allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: true
     },
     ciudad: {
-      type: DataTypes.CHAR,
-      allowNull: true,
+      type: DataTypes.STRING,
+      allowNull: false
     },
     provincia: {
-      type: DataTypes.CHAR,
-      allowNull: false,
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    codigoPostal: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     pais: {
-      type: DataTypes.CHAR,
-      allowNull: false,
-      // validate:{isIn:[['AR','FR','CA','US','MX']]}
+      type: DataTypes.STRING,
+      allowNull: false
     },
-
+    observaciones: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
   }, {
     sequelize,
     modelName: 'Direccion',
-    tableName: "Direcciones",
-    timestamps: false,
-    createdAt: false,
-    updatedAt: false,
+    tableName: 'Direcciones',
+    timestamps: true,
   });
+
   return Direccion;
 };

@@ -26,7 +26,7 @@ const Home = () => {
                 </Container>
             </Navbar>
 
-            <Container fluid>
+            {/* <Container fluid>
                 <Row>
                     <Col md={2} className="bg-light sidebar">
                         <Nav defaultActiveKey="/home" className="flex-column">
@@ -45,7 +45,7 @@ const Home = () => {
                         <Outlet />
                     </Col>
                 </Row>
-            </Container>
+            </Container> */}
         </div>
     );
 };

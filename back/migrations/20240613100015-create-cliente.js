@@ -1,7 +1,7 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Clientes', {
       id: {
         allowNull: false,
@@ -10,65 +10,59 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       usuarioCId: {
-        allowNull: true,
-        foreignKey: true,
         type: Sequelize.INTEGER,
-        references: { model: "Usuarios", key: "id", constraints: false, },
+        references: {
+          model: 'Usuarios',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        allowNull: true,
       },
       razonSocialCId: {
-        allowNull: true,
-        foreignKey: true,
         type: Sequelize.INTEGER,
-        references: { model: "RazonesSociales", key: "id", constraints: false, },
+        references: {
+          model: 'RazonesSociales',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        allowNull: true,
       },
       tipoDniCId: {
-        allowNull: true,
-        foreignKey: true,
         type: Sequelize.INTEGER,
-        references: { model: "TiposDni", key: "id", constraints: false, },
-      },
-      direccionCId: {
+        references: {
+          model: 'TiposDni',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         allowNull: true,
-        foreignKey: true,
-        type: Sequelize.INTEGER,
-        references: { model: "Direcciones", key: "id", constraints: false, },
-      },
-      telefonoCId: {
-        allowNull: true,
-        foreignKey: true,
-        type: Sequelize.INTEGER,
-        references: { model: "Telefonos", key: "id", constraints: false, },
       },
       nombreCliente: {
-        allowNull: true,
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: true
       },
       cuilcuitC: {
         allowNull: true,
-        type: Sequelize.INTEGER.UNSIGNED
+        type: Sequelize.BIGINT,
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: true,
-        unique: true,
-        validate: {
-          isEmail: {
-            msg: "El email tiene que ser un correo valido"
-          }
-        }
+        allowNull: true
       },
-      cumpleaños: {
-        allowNull: true,
-        type: Sequelize.DATE,
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
       },
-      tipoCliente: {
-        allowNull: true,
-        type: Sequelize.STRING,
-      },
-
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
     });
   },
-  async down(queryInterface, Sequelize) {
+
+  down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Clientes');
   }
 };

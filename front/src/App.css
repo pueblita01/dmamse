@@ -1,5 +1,6 @@
 .d-flex {
   display: flex;
+  margin-top: 20px; /* Ajusta este valor según la altura de tu navbar */
 }
 .flex-grow-1 {
   flex-grow: 1;

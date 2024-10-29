@@ -1,39 +1,43 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
-const { now } = require('sequelize/lib/utils');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Usuario extends Model {
     static associate(models) {
+      // Relación uno a uno: Un usuario puede ser un admin
       Usuario.hasOne(models.Admin, {
-        foreignKey: "usuarioAId",
-        as: "Usuarios",
-        onDelete: "SET NULL",
-        onUpdate: "SET NULL"
+        foreignKey: 'usuarioAId',
+        as: 'UsuarioAdmin', // Alias único para la relación con Admin
+        onDelete: 'SET NULL',
+        onUpdate: 'SET NULL',
       });
+
+      // Relación uno a uno: Un usuario puede ser un cliente
       Usuario.hasOne(models.Cliente, {
-        foreignKey: "usuarioCId",
-        as: "Usuarios",
-        onDelete: "SET NULL",
-        onUpdate: "SET NULL"
+        foreignKey: 'usuarioCId',
+        as: 'Cliente',
+        onDelete: 'SET NULL',
+        onUpdate: 'SET NULL',
       });
+      
+      // Relación uno a uno: Un usuario puede ser un proveedor
       Usuario.hasOne(models.Proveedor, {
-        foreignKey: "usuarioPId",
-        as: "Usuarios",
-        onDelete: "SET NULL",
-        onUpdate: "SET NULL"
+        foreignKey: 'usuarioPId',
+        as: 'Proveedor',
+        onDelete: 'SET NULL',
+        onUpdate: 'SET NULL',
       });
+      
+      // Relación uno a muchos: Un usuario puede tener múltiples cierres
       Usuario.hasMany(models.Cierre, {
-        as: 'Cierres',
+        as: 'CierresU',
         foreignKey: 'usuarioCierreId',
-        sourceKey: 'id',
-        constraints: false,
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-      })
-    };
+        onUpdate: 'CASCADE',
+      });
+    }
   }
+
   Usuario.init({
     username: {
       allowNull: false,
@@ -46,9 +50,9 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       validate: {
         isEmail: {
-          msg: "El email tiene que ser un correo valido"
-        }
-      }
+          msg: "El email tiene que ser un correo válido",
+        },
+      },
     },
     password: {
       type: DataTypes.STRING,
@@ -56,9 +60,9 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: {
           args: [4, 20],
-          msg: "La contraseña tiene que tener de 4 a 20 caracteres"
-        }
-      }
+          msg: "La contraseña tiene que tener de 4 a 20 caracteres",
+        },
+      },
     },
     registrado: {
       type: DataTypes.BOOLEAN,
@@ -72,13 +76,10 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Usuario',
     tableName: "Usuarios",
-    // paranoid:true
-    // freezeTableName:true,
     timestamps: true,
-    createdAt: false,
-    updatedAt: true,
+    createdAt: false,  // El campo `createdAt` no se utilizará
+    updatedAt: true,   // `updatedAt` se mantendrá para las actualizaciones
   });
+
   return Usuario;
 };
-
-

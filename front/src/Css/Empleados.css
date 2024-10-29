@@ -1,0 +1,114 @@
+/* src/components/Empleados.css */
+
+.container {
+    background-color: #f8f9fa; /* Color de fondo suave */
+    border-radius: 8px; /* Bordes redondeados */
+    padding: 20px; /* Espaciado interno */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+    margin: 30px 0; /* Margen superior e inferior, sin margen lateral */
+    max-width: 800px; /* Ancho máximo */
+    width: 90%; /* Ancho del 90% para pantallas pequeñas */
+}
+
+h1 {
+    color: #343a40; /* Color del texto */
+    margin-bottom: 20px; /* Margen inferior */
+    text-align: center; /* Centrar título */
+}
+
+.form-group label {
+    font-weight: bold; /* Texto en negrita */
+    color: #495057; /* Color de texto */
+}
+
+.table-custom {
+    margin-top: 20px; /* Margen superior */
+    width: 100%; /* Ancho completo */
+    border-collapse: collapse; /* Evita bordes duplicados */
+    overflow-x: auto; /* Permite el desplazamiento horizontal si es necesario */
+}
+
+.table-custom th {
+    background-color: #007bff; /* Color de fondo del encabezado */
+    color: white; /* Color del texto en el encabezado */
+    text-align: left; /* Alinear texto a la izquierda */
+    padding: 10px; /* Espaciado interno para celdas de encabezado */
+}
+
+.table-custom td {
+    text-align: center; /* Centrar texto */
+    padding: 8px; /* Espaciado interno para celdas */
+    border: 1px solid #ddd; /* Borde para celdas */
+}
+
+/* Botones */
+.btn {
+    background-color: #28a745; /* Color del botón */
+    border: none; /* Sin borde */
+    color: white; /* Color del texto del botón */
+    padding: 10px 15px; /* Espaciado interno */
+    border-radius: 5px; /* Bordes redondeados para botones */
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Color del botón de eliminar */
+}
+
+.btn:hover {
+    background-color: #218838; /* Color del botón al pasar el mouse */
+}
+
+.btn-danger:hover {
+    background-color: #c82333; /* Color del botón de eliminar al pasar el mouse */
+}
+
+/* Estilos para filas */
+.table-custom tr:hover {
+    background-color: #f5f5f5; /* Efecto hover para filas */
+}
+
+.table-custom tr:nth-child(even) {
+    background-color: #f9f9f9; /* Alternar colores de filas */
+}
+
+/* Media Queries para responsividad */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px; /* Menos padding en pantallas más pequeñas */
+        width: 95%; /* Aumentar ancho en móviles */
+        margin: 20px 0; /* Ajustar margen superior e inferior en móviles */
+    }
+
+    .form-group {
+        margin-bottom: 15px; /* Espaciado inferior para los grupos de formulario */
+    }
+
+    h1 {
+        font-size: 1.5rem; /* Tamaño de fuente más pequeño para el título */
+    }
+
+    .table-custom th, .table-custom td {
+        font-size: 0.9rem; /* Tamaño de fuente más pequeño en la tabla */
+    }
+}
+
+@media (max-width: 576px) {
+    .form-group {
+        flex-direction: column; /* Cambiar a una columna en pantallas pequeñas */
+        align-items: flex-start; /* Alinear elementos a la izquierda */
+    }
+
+    .form-group label {
+        width: 100%; /* Etiquetas de ancho completo */
+    }
+
+    .table-custom {
+        font-size: 0.8rem; /* Más pequeño en pantallas extra pequeñas */
+    }
+
+    .btn {
+        width: 100%; /* Botones de ancho completo */
+        margin-top: 10px; /* Margen superior entre botones */
+        padding: 12px; /* Espaciado interno de botones en móviles */
+    }
+}

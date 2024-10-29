@@ -1,7 +1,7 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Admins', {
       id: {
         allowNull: false,
@@ -11,29 +11,35 @@ module.exports = {
       },
       usuarioAId: {
         allowNull: true,
-        foreignKey: true,
         type: Sequelize.INTEGER,
-        references: { model: "Usuarios", key: "id", constraints: false, },
-      },
-      nombreEmpresa: {
-        type: Sequelize.STRING,
-        allowNull: true,
+        references: {
+          model: 'Usuarios',
+          key: 'id',
+          deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       },
       nivelAcceso: {
         allowNull: true,
-        type: Sequelize.CHAR
+        type: Sequelize.CHAR,
+      },
+      nombreEmpresa: {
+        allowNull: true,
+        type: Sequelize.STRING,
       },
       createdAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: false,
+        allowNull: true,
         type: Sequelize.DATE
       }
     });
   },
-  async down(queryInterface, Sequelize) {
+
+  down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Admins');
   }
 };

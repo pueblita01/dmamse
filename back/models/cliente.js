@@ -1,71 +1,68 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Cliente extends Model {
     static associate(models) {
       Cliente.belongsTo(models.Usuario, {
+        as: "UsuarioC",
         foreignKey: "usuarioCId",
-        as: "Usuarios",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
         constraints: false,
       });
+
       Cliente.belongsTo(models.RazonSocial, {
+        as: "RazonSocialC",
         foreignKey: "razonSocialCId",
-        as: "RazonesSociales",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
         constraints: false,
       });
+
       Cliente.belongsTo(models.TipoDni, {
-        foreignKey: " tipoDniCId",
-        as: "TiposDni",
+        as: "TiposDniC",
+        foreignKey: "tipoDniCId",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
         constraints: false,
       });
+
       Cliente.hasMany(models.Direccion, {
-        as: 'Direcciones',
-        foreignKey: 'direccionId',
-        sourceKey: 'id',
-        constraints: false,
+        as: 'DireccionesC', 
+        foreignKey: 'clienteDirId',
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-      })
+        onUpdate: 'CASCADE',
+        constraints: false,
+      });
+
       Cliente.hasMany(models.Telefono, {
-        as: 'Telefonos',
-        foreignKey: 'telefonoCId',
-        sourceKey: 'id',
-        constraints: false,
+        as: "TelefonosC",
+        foreignKey: 'clienteTelId',
         onDelete: 'CASCADE',
-        onUpdate: 'CASCADE'
-      })
+        onUpdate: 'CASCADE',
+        constraints: false,
+      });
+
       Cliente.hasMany(models.Venta, {
-        as: 'Ventas',
+        as: 'VentasC',
         foreignKey: 'clienteVtaId',
-        sourceKey: 'id',
-        constraints: false,
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
-      })
+      });
+
       Cliente.hasMany(models.Reserva, {
-        as: 'Reservas',
+        as: 'ReservasC',
         foreignKey: 'clienteReservaId',
-        sourceKey: 'id',
-        constraints: false,
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
-      })
+      });
+
       Cliente.hasMany(models.Cheque, {
-        as: 'Cheques',
+        as: 'ChequesC',
         foreignKey: 'clienteCHId',
-        sourceKey: 'id',
-        constraints: false,
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
-      })
+      });
     }
   }
 
@@ -74,31 +71,19 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "Usuarios", key: "id", constraints: false, },
+      references: { model: "Usuarios", key: "id" },
     },
     razonSocialCId: {
       allowNull: true,
       foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "RazonesSociales", key: "id", constraints: false, },
+      references: { model: "RazonesSociales", key: "id" },
     },
     tipoDniCId: {
       allowNull: true,
       foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "TiposDni", key: "id", constraints: false, },
-    },
-    direccionCId: {
-      allowNull: true,
-      foreignKey: true,
-      type: DataTypes.INTEGER,
-      references: { model: "Direcciones", key: "id", constraints: false, },
-    },
-    telefonoCId: {
-      allowNull: true,
-      foreignKey: true,
-      type: DataTypes.INTEGER,
-      references: { model: "Telefonos", key: "id", constraints: false, },
+      references: { model: "TiposDni", key: "id" },
     },
     nombreCliente: {
       allowNull: true,
@@ -106,34 +91,25 @@ module.exports = (sequelize, DataTypes) => {
     },
     cuilcuitC: {
       allowNull: true,
-      type: DataTypes.INTEGER.UNSIGNED
+      type: DataTypes.BIGINT,
     },
     email: {
-      type: DataTypes.STRING,
       allowNull: true,
-      unique: true,
-      validate: {
-        isEmail: {
-          msg: "El email tiene que ser un correo valido"
-        }
-      }
-    },
-    cumpleaños: {
-      allowNull: true,
-      type: DataTypes.DATE,
-    },
-    tipoCliente: {
-      allowNull: true,
-      type: DataTypes.STRING,
-    },
+      type: DataTypes.STRING
+    }
   }, {
     sequelize,
     modelName: 'Cliente',
-    tableName: "Clientes",
-    timestamps: false,
-    createdAt: false,
-    updatedAt: false,
+    tableName: 'Clientes',
+    timestamps: true
   });
-  // Cliente.sequelize.define("Clientes")
+
   return Cliente;
 };
+
+//     const DireccionController = require("./direcciones");
+// const TelefonoController = require("./telefonos");
+// // Función para crear una nueva dirección
+// const createDireccion = require('./direcciones').createDireccion;
+// // Función para crear un nuevo teléfono
+// const createTelefono = require('./telefonos').createTelefono;

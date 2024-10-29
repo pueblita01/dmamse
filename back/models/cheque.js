@@ -1,7 +1,6 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Cheque extends Model {
     static associate(models) {
@@ -12,31 +11,41 @@ module.exports = (sequelize, DataTypes) => {
         onUpdate: "CASCADE",
       });
       Cheque.belongsTo(models.Proveedor, {
-        as: 'Proveedores',
+        as: 'ProveedorCH',
         foreignKey: "proveedorCHId",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
       Cheque.belongsTo(models.Cliente, {
-        as: 'Clientes',
+        as: 'ClienteCH',
         foreignKey: "clienteCHId",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
+      Cheque.belongsTo(models.Empleado, {
+        as: 'EmpleadoCH',
+        foreignKey: "empleadoCHId",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
     }
   }
+
   Cheque.init({
     proveedorCHId: {
       allowNull: true,
-      foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "Proveedores", key: "id", constraints: false, },
+      references: { model: "Proveedores", key: "id" },
     },
     clienteCHId: {
       allowNull: true,
-      foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "Clientes", key: "id", constraints: false, },
+      references: { model: "Clientes", key: "id" },
+    },
+    empleadoCHId: {
+      allowNull: true,
+      type: DataTypes.INTEGER,
+      references: { model: "Empleados", key: "id" },
     },
     numeroCheque: {
       allowNull: true,
@@ -61,7 +70,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Cheque',
-    tableName: 'Cheques'
+    tableName: 'Cheques',
+    timestamps: false,
   });
+
   return Cheque;
 };
