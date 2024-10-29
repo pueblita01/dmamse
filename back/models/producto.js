@@ -1,128 +1,121 @@
 'use strict';
-const { models, sequelize } = require("../SequelizeConnection");
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Producto extends Model {
     static associate(models) {
+      // Producto pertenece a una Categoria
       Producto.belongsTo(models.Categoria, {
-        foreignKey: "categoriaId",
-        as: 'Categorias',
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
-
+        foreignKey: 'categoriaId',
+        as: 'CategoriasPrd',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       });
+      
+      // Producto pertenece a una Familia
       Producto.belongsTo(models.Familia, {
-        foreignKey: "familiaId",
-        as: 'Familias',
-        constraints: false,
-        onDelete: "SET NULL",
-        onUpdate: "CASCADE",
-      });
-      Producto.belongTo(models.Proveedor, {
-        foreignKey: "proveedorProdId",
-        as: 'Proveedores',
-        constraints: false,
-        onDelete: "SET NULL",
-        onUpdate: "CASCADE"
-      });
-      Producto.hasMany(models.DetallesVenta, {
-        as: "DetallesVentas",
-        foreignKey: "productoVtaId",
-        onDelete: "SET NULL",
-        onUpdate: "CASCADE",
-      });
-      Producto.hasMany(models.DetallesCompra, {
-        as: "DetallesCompras",
-        foreignKey: "productoCprId",
-        onDelete: "CASCADE",
-        onUpdate: "CASCADE",
+        foreignKey: 'familiaId',
+        as: 'FamiliasPrd',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       });
 
+      // Producto pertenece a un Proveedor
+      Producto.belongsTo(models.Proveedor, {
+        foreignKey: 'proveedorProdId',
+        as: 'ProveedoresPrd',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      });
+
+      // Producto tiene muchos DetallesVenta
+      Producto.hasMany(models.DetallesVenta, {
+        as: 'DetallesVentasPrd',
+        foreignKey: 'productoVtaId',
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      });
+
+      // Producto tiene muchos DetallesCompra
+      Producto.hasMany(models.DetallesCompra, {
+        as: 'DetallesComprasPrd',
+        foreignKey: 'productoCprId',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+      });
     }
   }
-  //categoria refiere a marca , Familia(RUBRO) Deporte,alimento, bazar..,SubFamilia plasticos,metal,
-  // movimiento (entrada/salida) //categoria como una marca ej Granix
 
   Producto.init({
-    // sequelize.define(
-    //   "Producto",
-    //   {
     simboloProducto: {
       allowNull: true,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     codigoBarra: {
       allowNull: true,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     proveedorProdId: {
       allowNull: true,
-      foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "Proveedores", key: "id", constraints: false, },
+      references: { model: 'Proveedores', key: 'id' },
     },
     categoriaId: {
       allowNull: true,
-      foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "Categorias", key: "id", constraints: false, },
+      references: { model: 'Categorias', key: 'id' },
     },
     familiaId: {
       allowNull: true,
-      foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "Familias", key: "id", constraints: false, },
+      references: { model: 'Familias', key: 'id' },
     },
-
     nombre: {
       allowNull: true,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     descripcion: {
       allowNull: true,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     precioPorKilo: {
       allowNull: true,
-      type: DataTypes.DECIMAL(10, 2)
+      type: DataTypes.DECIMAL(10, 2),
     },
     unidadMedida: {
       allowNull: true,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     presentacion: {
       allowNull: true,
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
     },
     precioCosto: {
       allowNull: true,
-      type: DataTypes.DECIMAL(10, 2)
+      type: DataTypes.DECIMAL(10, 2),
     },
     precioUnidad: {
       allowNull: true,
-      type: DataTypes.DECIMAL(10, 2)
+      type: DataTypes.DECIMAL(10, 2),
     },
     precioSugerido: {
       allowNull: true,
-      type: DataTypes.DECIMAL(10, 2)
+      type: DataTypes.DECIMAL(10, 2),
     },
     precioActual: {
       allowNull: true,
-      type: DataTypes.DECIMAL(10, 2)
+      type: DataTypes.DECIMAL(10, 2),
     },
     stockActual: {
       allowNull: true,
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
     },
     stockMinimo: {
-      allowNul: true,
-      type: DataTypes.INTEGER
+      allowNull: true,
+      type: DataTypes.INTEGER,
     },
     fechaCreacion: {
       allowNull: false,
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
     },
     movimiento: {
       allowNull: true,
@@ -130,29 +123,34 @@ module.exports = (sequelize, DataTypes) => {
     },
     ultimaActualizacion: {
       allowNull: true,
-      type: DataTypes.DATE
+      type: DataTypes.DATE,
     },
     suelto: {
       allowNull: true,
-      type: DataTypes.BOOLEAN
+      type: DataTypes.BOOLEAN,
     },
+    litros: {  // Nuevo atributo para el volumen en litros
+      allowNull: true,
+      type: DataTypes.DECIMAL(10, 2),
+    },
+    peso: {  // Nuevo atributo para el peso
+      allowNull: true,
+      type: DataTypes.DECIMAL(10, 2),
+    },
+    cantidadPorEmpaque: {  // Nuevo atributo para la cantidad por empaque
+      allowNull: true,
+      type: DataTypes.INTEGER,
+    },
+    tipoEmpaque: {  // Nuevo atributo para el tipo de empaque
+      allowNull: true,
+      type: DataTypes.STRING,
+    },
+  }, {
+    sequelize,
+    modelName: 'Producto',
+    tableName: 'Productos',
+    timestamps: false,
+  });
 
-
-  },
-    {
-
-      sequelize,
-      modelName: "Producto",
-      tableName: "Productos",
-      timestamps: false,
-      createdAt: false,
-      updatedAt: false,
-
-
-    }
-
-
-  )
-  Producto.sequelize.define("Productos")
-  return Producto
-}
+  return Producto;
+};

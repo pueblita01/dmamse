@@ -1,7 +1,7 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Telefonos', {
       id: {
         allowNull: false,
@@ -11,10 +11,7 @@ module.exports = {
       },
       codigopais: {
         type: Sequelize.STRING(6),
-        allowNull: true,
-        validate: {
-          is: /^\+\d{1,5}$/
-        }
+        allowNull: true
       },
       caracteristica: {
         type: Sequelize.INTEGER,
@@ -22,25 +19,43 @@ module.exports = {
       },
       numero: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-          len: {
-            args: [1, 20],
-            msg: "El telefono tiene que tener 1 a 20 caracteres"
-          }
-        }
+        allowNull: false
       },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+      clienteTelId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Clientes',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
+        allowNull: true,
       },
-      updatedAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+      proveedorTelId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Proveedores',
+          key: 'id'
+        },
+        onDelete: 'SET NULL',
+        onUpdate: 'SET NULL',
+        allowNull: true,
+      },
+      empleadoTelId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Empleados',
+          key: 'id'
+        },
+        onDelete: 'SET NULL',
+        onUpdate: 'SET NULL',
+        allowNull: true,
       }
     });
+    
   },
-  async down(queryInterface, Sequelize) {
+
+  down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Telefonos');
   }
 };

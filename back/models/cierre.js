@@ -1,25 +1,28 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Cierre extends Model {
     static associate(models) {
       Cierre.belongsTo(models.Usuario, {
         foreignKey: "usuarioCierreId",
-        as: "Usuarios",
+        as: "UsuarioCierre",  // Asegúrate de que este alias sea único
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
         constraints: false,
       });
     }
   }
+
   Cierre.init({
     usuarioCierreId: {
       allowNull: true,
-      foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "Usuarios", key: "id", constraints: false, },
+      references: {
+        model: "Usuarios",  // Asegúrate de que esto coincida con el nombre de la tabla en la base de datos
+        key: "id",
+        constraints: false,
+      },
     },
     fechaCierre: {
       allowNull: true,
@@ -39,7 +42,8 @@ module.exports = (sequelize, DataTypes) => {
     tableName: 'Cierres',
     timestamps: false,
     createdAt: false,
-    updatedAt: false
+    updatedAt: false,
   });
+
   return Cierre;
 };

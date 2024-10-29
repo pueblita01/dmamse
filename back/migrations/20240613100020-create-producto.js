@@ -1,104 +1,126 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Productos', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       simboloProducto: {
+        type: Sequelize.STRING,
         allowNull: true,
-        type: Sequelize.STRING
       },
       codigoBarra: {
+        type: Sequelize.STRING,
         allowNull: true,
-        type: Sequelize.STRING
       },
       proveedorProdId: {
-        allowNull: true,
-        foreignKey: true,
         type: Sequelize.INTEGER,
-        references: { model: "Proveedores", key: "id", constraints: false, },
+        allowNull: true,
+        references: {
+          model: 'Proveedores',
+          key: 'id',
+        },
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
       },
       categoriaId: {
-        allowNull: true,
-        foreignKey: true,
         type: Sequelize.INTEGER,
-        references: { model: "Categorias", key: "id" },
+        allowNull: true,
+        references: {
+          model: 'Categorias',
+          key: 'id',
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
       },
       familiaId: {
-        allowNull: true,
-        foreignKey: true,
         type: Sequelize.INTEGER,
-        references: { model: "Familias", key: "id", constraints: false, },
-      },
-
-      nombre: {
         allowNull: true,
-        type: Sequelize.STRING
+        references: {
+          model: 'Familias',
+          key: 'id',
+        },
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+      },
+      nombre: {
+        type: Sequelize.STRING,
+        allowNull: true,
       },
       descripcion: {
+        type: Sequelize.STRING,
         allowNull: true,
-        type: Sequelize.STRING
       },
       precioPorKilo: {
+        type: Sequelize.DECIMAL(10, 2),
         allowNull: true,
-        type: Sequelize.DECIMAL(10, 2)
       },
       unidadMedida: {
+        type: Sequelize.STRING,
         allowNull: true,
-        type: Sequelize.STRING
       },
       presentacion: {
+        type: Sequelize.STRING,
         allowNull: true,
-        type: Sequelize.STRING
       },
       precioCosto: {
+        type: Sequelize.DECIMAL(10, 2),
         allowNull: true,
-        type: Sequelize.DECIMAL(10, 2)
       },
       precioUnidad: {
+        type: Sequelize.DECIMAL(10, 2),
         allowNull: true,
-        type: Sequelize.DECIMAL(10, 2)
       },
       precioSugerido: {
+        type: Sequelize.DECIMAL(10, 2),
         allowNull: true,
-        type: Sequelize.DECIMAL(10, 2)
       },
       precioActual: {
+        type: Sequelize.DECIMAL(10, 2),
         allowNull: true,
-        type: Sequelize.DECIMAL(10, 2)
       },
       stockActual: {
+        type: Sequelize.INTEGER,
         allowNull: true,
-        type: Sequelize.INTEGER
       },
       stockMinimo: {
-        allowNul: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: true,
       },
       fechaCreacion: {
+        type: Sequelize.DATE,
         allowNull: false,
-        type: Sequelize.DATE
+        defaultValue: Sequelize.NOW,
       },
       movimiento: {
+        type: Sequelize.CHAR, // Asegúrate de que esto sea lo que deseas
         allowNull: true,
-        type: Sequelize.CHAR,
       },
       ultimaActualizacion: {
+        type: Sequelize.DATE,
         allowNull: true,
-        type: Sequelize.DATE
       },
       suelto: {
+        type: Sequelize.BOOLEAN,
         allowNull: true,
-        type: Sequelize.BOOLEAN
       },
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE,
+        defaultValue: Sequelize.NOW,
+      }
     });
   },
-  async down(queryInterface, Sequelize) {
+  down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Productos');
   }
 };

@@ -7,13 +7,18 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       TipoDni.hasOne(models.Cliente, {
         foreignKey: "tipoDniCId",
-        as: "Clientes",
+        // as: "Clientes",
         onDelete: "SET NULL",
         onUpdate: "SET NULL"
       });
       TipoDni.hasOne(models.Proveedor, {
         foreignKey: "tipoDniPId",
-        as: "Proveedores",
+        // as: "Proveedores",
+        onDelete: "SET NULL",
+        onUpdate: "SET NULL"
+      });
+      TipoDni.hasOne(models.Empleado, {
+        foreignKey: "tipoDniEId",
         onDelete: "SET NULL",
         onUpdate: "SET NULL"
       });

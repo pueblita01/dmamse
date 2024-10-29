@@ -1,0 +1,292 @@
+/* Estilos para el contenedor principal */
+.container-form {
+  margin: top 100px auto!important;
+  width: 100% !important;
+  /* max-width: 1200px !important; */
+  max-height: 600px!important;/* agregado despues */
+  padding: 20px !important;
+  background-color: #fff !important;
+  border-radius: 5px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+  /* Permitir desplazamiento horizontal si es necesario  overflow-x: auto !important;*/
+  overflow-y: auto!important;/* Muestra el scrollbar vertical */
+  overflow-x: hidden!important;
+}
+
+.cardbodylistacliente-custom{
+  margin: bottom 0px!important;
+  padding: 1px !important;
+  max-height: 400px!important; 
+  /* overflow-y: auto!important; */
+}
+/* Estilos para toda la tabla */
+/* Estilos para hacer que los encabezados de la tabla queden fijos */
+/* Estilos para el contenedor principal */
+.container-form {
+  margin: top 100px auto !important;
+  width: 100% !important;
+  max-height: 600px !important; /* ajustado para máximo tamaño del contenedor */
+  padding: 20px !important;
+  background-color: #fff !important;
+  border-radius: 5px !important;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1) !important;
+  overflow-y: auto !important; /* Asegura el scrollbar vertical */
+  overflow-x: hidden !important;
+}
+
+/* Estilos para toda la tabla */
+.table-custom {
+  width: 100% !important;
+  max-height: 400px !important; /* Define una altura específica */
+  overflow-y: auto !important; /* Muestra el scrollbar vertical siempre */
+  overflow-x: hidden !important; /* Evita el scrollbar horizontal */
+}
+
+/* Estilos para hacer que los encabezados de la tabla queden fijos */
+.table-custom th {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 10 !important;
+  background-color: #bcaadd !important;
+  color: #080808 !important;
+  padding: 10px !important;
+  text-align: left !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-weight: 300 !important;
+  font-size: 14px !important;
+  border: 1px solid #ddd !important;
+}
+
+/* Estilos para las filas de la tabla */
+.table-custom td {
+  padding: 8px !important;
+  border: 1px solid #ddd !important;
+  font-family: Arial, sans-serif !important;
+  font-size: 12px !important;
+}
+
+/* Resaltar fila al pasar el mouse */
+.table-custom tr:hover {
+  background-color: #f5f5f5 !important;
+}
+
+/* Alternar colores de filas */
+.table-custom tr:nth-child(even) {
+  background-color: #f9f9f9 !important;
+}
+
+/* Estilos opcionales para los botones */
+.btn-edit, .btn-delete {
+  border: none !important;
+  background: none !important;
+  cursor: pointer !important;
+  color: #007bff !important;
+  font-size: 16px !important;
+}
+
+.btn-edit:hover, .btn-delete:hover {
+  color: #0056b3 !important;
+}
+
+.btn-delete {
+  color: #df3e3e !important;
+}
+
+.btn-delete:hover {
+  color: #eb4c4c !important;
+}
+
+/* Inputs */
+.cuilcuit-input {
+  width: 150px !important;
+}
+
+.codigoPostalyNumero-input {
+  width: 80px !important;
+}
+
+.telefono-input {
+  width: 80px !important;
+}
+
+.todos-label {
+  font-size: 12px !important;
+}
+
+/* Estilos del botón agregar */
+.boton-agregar {
+  background-color: transparent !important;
+  color: green !important;
+  border: 2px solid green !important;
+  padding: 8px 16px !important;
+  border-radius: 4px !important;
+  font-size: 14px !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease, color 0.3s ease !important;
+  width: auto !important;
+}
+
+.boton-agregar:hover {
+  background-color: green !important;
+  color: white !important;
+}
+
+.centrar-boton-agregar {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+/* Estilos del botón eliminar con icono más pequeño */
+.boton-eliminar {
+  background-color: transparent !important;
+  color: rgb(230, 63, 63) !important;
+  border: none !important;
+  padding: 4px 8px !important; /* Botón más pequeño */
+  border-radius: 4px !important;
+  font-size: 12px !important;  /* Texto más pequeño */
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important; /* Alinear icono y texto verticalmente */
+  justify-content: center !important;
+  transition: background-color 0.3s ease, color 0.3s ease !important;
+}
+
+.boton-eliminar i {
+  margin-right: 4px !important; /* Espacio entre el icono y el texto */
+  font-size: 14px !important; /* Icono un poco más pequeño */
+}
+
+.boton-eliminar:hover {
+  color: rgb(177, 45, 45) !important;
+}
+
+
+.boton-guardar {
+  background: linear-gradient(45deg, #2196F3, #21CBF3) !important; /* Degradado azul */
+  color: white !important; 
+  padding: 10px 20px !important;  /* Espaciado interno */
+  border: none !important; 
+  border-radius: 50px !important; /* Bordes redondeados para un estilo delicado */
+  font-size: 18px !important; 
+  font-weight: bold !important; 
+  cursor: pointer !important; 
+  transition: background 0.3s ease, box-shadow 0.3s ease !important;  
+  display: block !important; /* Asegura que el botón sea un bloque para centrarlo */
+  margin: 20px auto !important; /* Margen automático para centrar el botón */
+  text-align: center !important; 
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2) !important; /* Sombra suave para darle profundidad */
+}
+
+.boton-guardar:hover {
+  background: linear-gradient(45deg, #1976D2, #1D9CDA) !important; /* Degradado más oscuro al pasar el cursor */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important; /* Sombra más pronunciada al pasar el mouse */
+}
+
+.boton-guardar:focus {
+  outline: 3px solid #076aff !important; /* Resaltado amarillo al enfocarse */
+}
+
+.boton-guardar:active {
+  transform: scale(0.98) !important; /* Ligera reducción al hacer clic */
+}
+
+.boton-guardar i {
+  margin-right: 8px; 
+}
+
+/* Estilos personalizados para botones debajo del buscador */
+.header-fixed {
+  position: sticky !important;
+  position: fixed ;
+  top: 20 !important;
+  z-index: 1000 !important;
+  background-color: #fff !important;
+  padding: 10px 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  flex-wrap: wrap !important; /* Hace que los botones y el buscador salten de línea si es necesario */
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1) !important;
+ 
+}
+
+
+.btn-detalle, .btn-ver-lista, .btn-nuevo {
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  margin: 5px !important;
+  margin-left: 5px;
+  height: 100%;
+}
+/* Hover effects */
+.boton-detalles:hover {
+  background-color: #138496 !important; /* Color más oscuro en hover */
+}
+.boton-lista:hover {
+  background-color: #218838 !important;
+}
+/* Ajuste del buscador */
+.buscador-cliente {
+  flex: 1 1 200px !important; /* Ancho flexible para que se adapte a diferentes pantallas */
+  margin: 5px !important;
+  padding: 8px !important;
+  font-size: 14px !important;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .header-fixed {
+    flex-direction: column !important; /* Cambia la dirección a columna en pantallas pequeñas */
+    align-items: flex-start !important; /* Alinea los elementos a la izquierda */
+  }
+  .btn-detalle, .btn-ver-lista, .btn-nuevo {
+    width: 100% !important; /* Los botones ocupan el ancho completo */
+    font-size: 14px !important;
+  }
+  .buscador-cliente {
+    width: 100% !important; /* El buscador ocupa el ancho completo */
+    margin: 5px 0 !important;
+  }
+}
+
+
+/* Media Queries para responsividad */
+@media (max-width: 768px) {
+  .boton-guardar {
+    width: 100% !important; /* El botón ocupará el ancho completo de la pantalla */
+    padding: 12px 0 !important; /* Aumentar un poco el padding para pantallas más pequeñas */
+    font-size: 18px !important; /* Texto un poco más grande para mejor lectura en móviles */
+  }
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .boton-agregar, .boton-eliminar, .boton-guardar {
+    width: 100% !important;
+    padding: 12px 0 !important;
+    font-size: 14px !important;
+  }
+
+  .table-custom {
+    width: 100% !important;
+    font-size: 12px !important;
+  }
+
+  .table-custom th, .table-custom td {
+    padding: 8px !important;
+  }
+
+  .table-responsive {
+    display: block !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+  }
+}
+
+@media (max-width: 576px) {
+  .boton-agregar, .boton-eliminar, .boton-guardar {
+    padding: 5px 10px !important;
+    font-size: 12px !important;
+    width: 100% !important;
+  }
+}

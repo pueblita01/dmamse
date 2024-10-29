@@ -1,39 +1,44 @@
 'use strict';
-const Usuario = require('./usuario'); // Cambiado a require
-const Rol = require('./rol'); // Cambiado a require
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Usuarios_roles extends Model {
-
     static associate(models) {
-      Usuario.belongsToMany(models.Permiso, {
-        through: Usuarios_roles
-      })
-      Rol.belongsToMany(models.Rol, {
-        through: Usuarios_roles
-      })
+      // Relación muchos a muchos: Usuario pertenece a muchos Permisos a través de Usuarios_roles
+      models.Usuario.belongsToMany(models.Permiso, {
+        through: Usuarios_roles,
+        as: 'PermisosDeUsuario', // Alias único
+        foreignKey: 'usuarioRId',
+      });
+
+      // Relación muchos a muchos: Rol pertenece a muchos Usuarios a través de Usuarios_roles
+      models.Rol.belongsToMany(models.Usuario, {
+        through: Usuarios_roles,
+        as: 'UsuariosRoles', // Alias único
+        foreignKey: 'rolUsuarioId',
+      });
     }
   }
+
   Usuarios_roles.init({
     usuarioRId: {
       allowNull: true,
-      foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "Usuarios", key: "id", constraints: false, },
+      references: { model: 'Usuarios', key: 'id', constraints: false },
     },
     rolUsuarioId: {
       allowNull: true,
-      foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "Roles", key: "id", constraints: false, },
+      references: { model: 'Roles', key: 'id', constraints: false },
     },
-
   }, {
     sequelize,
     modelName: 'Usuarios_roles',
-    tableName: 'Usuarios_roles'
+    tableName: 'Usuarios_roles',
+    timestamps: false,
+    createdAt: false,
+    updatedAt: false,
   });
+
   return Usuarios_roles;
 };

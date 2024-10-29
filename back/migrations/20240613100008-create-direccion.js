@@ -1,7 +1,9 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
+const { FOREIGNKEYS } = require("sequelize/lib/query-types");
+
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Direcciones', {
       id: {
         allowNull: false,
@@ -9,41 +11,84 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      calle: {
-        type: Sequelize.CHAR,
+      clienteDirId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Clientes',
+          key: 'id'
+        },
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         allowNull: true,
       },
-      altura: {
+      proveedorDirId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
+        references: {
+          model: 'Proveedores',
+          key: 'id'
+        },
+        onDelete: 'SET NULL', // Cambiado a SET NULL según el modelo de Telefono
+        onUpdate: 'CASCADE',
+        allowNull: true,
       },
-      codigoPostal: {
-        type: Sequelize.CHAR,
-        allowNull: false,
+      empleadoDirId: {
+        allowNull: true,
+        foreignKey: true,
+        type: Sequelize.INTEGER,
+        references: { model: "Empleados", key: "id" },
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+        allowNull: true,
+      },
+      calle: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      numero: {
+        type: Sequelize.INTEGER,
+        allowNull: false
       },
       manzana: {
-        type: Sequelize.CHAR,
-        allowNull: true,
+        type: Sequelize.STRING,
+        allowNull: false
       },
       departamento: {
-        type: Sequelize.CHAR,
-        allowNull: false,
+        type: Sequelize.STRING,
+        allowNull: false
       },
       ciudad: {
-        type: Sequelize.CHAR,
-        allowNull: true,
+        type: Sequelize.STRING,
+        allowNull: false
       },
       provincia: {
-        type: Sequelize.CHAR,
-        allowNull: false,
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+      codigoPostal: {
+        type: Sequelize.STRING,
+        allowNull: false
       },
       pais: {
-        type: Sequelize.CHAR,
-        allowNull: false,
+        type: Sequelize.STRING,
+        allowNull: false
       },
+      observaciones: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+  
+      createdAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      },
+      updatedAt: {
+        allowNull: false,
+        type: Sequelize.DATE
+      }
     });
   },
-  async down(queryInterface, Sequelize) {
+
+  down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Direcciones');
   }
 };

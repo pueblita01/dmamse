@@ -1,5 +1,5 @@
 'use strict';
-/** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Usuarios', {
@@ -7,50 +7,37 @@ module.exports = {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
       },
       username: {
+        type: Sequelize.STRING,
         allowNull: false,
         unique: true,
-        type: Sequelize.STRING,
       },
       email: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
         validate: {
-          isEmail: {
-            msg: "El email tiene que ser un correo valido"
-          }
-        }
+          isEmail: true,
+        },
       },
-      // 20240612234420-create-usuario.js
       password: {
         type: Sequelize.STRING,
         allowNull: false,
-        validate: {
-          len: {
-            args: [4, 20],
-            msg: "La contraseña tiene que tener de 4 a 20 caracteres"
-          }
-        }
       },
       registrado: {
         type: Sequelize.BOOLEAN,
         allowNull: true,
       },
       fechaDeRegistro: {
-        allowNull: true,
         type: Sequelize.DATE,
-      },
-      createdAt: {
-        allowNull: false,
-        type: Sequelize.DATE
+        allowNull: true,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {

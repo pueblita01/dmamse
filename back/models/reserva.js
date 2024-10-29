@@ -1,34 +1,45 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
+
 module.exports = (sequelize, DataTypes) => {
   class Reserva extends Model {
     static associate(models) {
       Reserva.belongsTo(models.Cliente, {
+        as: "ClienteResv",
         foreignKey: "clienteReservaId",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
       Reserva.belongsTo(models.Proveedor, {
+        as: "ProveedorResv",
         foreignKey: "proveedorReservaId",
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+      });
+      Reserva.belongsTo(models.Empleado, {
+        as: "EmpleadoResv",
+        foreignKey: "empleadoReservaId",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
     }
   }
+
   Reserva.init({
     clienteReservaId: {
       allowNull: true,
-      foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "Clientes", key: "id", constraints: false, },
+      references: { model: "Clientes", key: "id" },
     },
     proveedorReservaId: {
       allowNull: true,
-      foreignKey: true,
       type: DataTypes.INTEGER,
-      references: { model: "Proveedores", key: "id", constraints: false, },
+      references: { model: "Proveedores", key: "id" },
+    },
+    empleadoReservaId: {
+      allowNull: true,
+      type: DataTypes.INTEGER,
+      references: { model: "Empleados", key: "id" },
     },
     fechaResvInicio: {
       allowNull: true,
@@ -55,8 +66,7 @@ module.exports = (sequelize, DataTypes) => {
     modelName: 'Reserva',
     tableName: "Reservas",
     timestamps: false,
-    createdAt: true,
-    updatedAt: true,
   });
+
   return Reserva;
 };

@@ -627,3 +627,28 @@ Asegúrate de tener un CSS básico para el layout en src/App.css:App.css:
 
 
 Con estos pasos, deberías tener un proyecto de React con un Navbar, Sidebar y un formulario de inicio de sesión (login) utilizando Bootstrap. Puedes personalizar más los componentes y el CSS según tus necesidades.
+
+
+
+
+INSOMNIA: 
+POST CLIENTE PRUEBA (CON DIRECCION)
+router.post("/cliente/nuevo/:razonSocial/:tipoDNI/:nroDNI", controllerCliente.create);
+ POST http://localhost:8383/cliente/nuevo/ACME/Documentos/12345675
+{
+  "nombreCliente": "Michael Brown",
+  "cuilcuitC": "2056789012",
+  "email": "michaelbrown@example.com",
+  "cumpleaños": "1988-07-30",
+  "tipoCliente": "CFinal",
+  "direccion": {
+    "calle": "Sunset Blvd.",
+    "altura": 321,
+    "codigoPostal": "45678",
+    "manzana": "E",
+    "departamento": "4D",
+    "ciudad": "Hollywood",
+    "provincia": "California",
+    "pais": "USA"
+  }
+}

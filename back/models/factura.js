@@ -6,18 +6,19 @@ module.exports = (sequelize, DataTypes) => {
   class Factura extends Model {
     static associate(models) {
       Factura.belongsTo(models.Caja, {
+        as: "CajaF",
         foreignKey: "facturaCajaId",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
       Factura.hasOne(models.Venta, {
-        as: "Ventas",
+        as: "VentasF",
         foreignKey: "facturaVtaId",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
       });
       Factura.hasOne(models.Compra, {
-        as: "Compras",
+        as: "ComprasF",
         foreignKey: "facturaCprId",
         onDelete: "CASCADE",
         onUpdate: "CASCADE",
